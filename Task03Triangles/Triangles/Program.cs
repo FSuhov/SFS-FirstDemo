@@ -4,6 +4,8 @@
 
 namespace Triangles
 {
+    using System;
+
     /// <summary> Contains an entry point of the application </summary>
     internal class Program
     {
@@ -14,6 +16,7 @@ namespace Triangles
             string[] localArgs = { "First", "23", "17.5", "12" };
             ShapeConsoleTester shapeConsole = new ShapeConsoleTester();
             shapeConsole.Run(localArgs);
+            Console.ReadKey();
         }
     }
 }

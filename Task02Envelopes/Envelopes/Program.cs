@@ -17,9 +17,9 @@ namespace Envelopes
     {
         private static void Main(string[] args)
         {
-            string[] localArgs = { "3.5", "5", "12", "6" };
             ConsoleEnvelopeComparator consoleComparator = new ConsoleEnvelopeComparator();
-            consoleComparator.Run(localArgs);
+            consoleComparator.Run(args);
+            Console.ReadKey();
         }
     }
 }

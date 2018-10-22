@@ -14,9 +14,9 @@ namespace ChessBoard
     /// </summary>
     public class ChessBoardConsoleUserInterface
     {
-        private Board _board;
+        private Board board;
 
-        private BoardConfig.ApplicationStatus _status;
+        private BoardConfig.ApplicationStatus status;
 
         /// <summary>
         /// Reads command line arguments, initializes instance of Board if valid, sets status of application.
@@ -27,16 +27,16 @@ namespace ChessBoard
             switch ((BoardConfig.ArgsStatus)args.Length)
             {
                 case BoardConfig.ArgsStatus.NoArgs:
-                    this._status = BoardConfig.ApplicationStatus.NoArgs;
+                    this.status = BoardConfig.ApplicationStatus.NoArgs;
                     break;
                 case BoardConfig.ArgsStatus.OneArg:
-                    this._status = this.InitBoard(args[0]);
+                    this.status = this.InitBoard(args[0]);
                     break;
                 case BoardConfig.ArgsStatus.TwoArgs:
-                    this._status = this.InitBoard(args[0], args[1]);
+                    this.status = this.InitBoard(args[0], args[1]);
                     break;
                 case BoardConfig.ArgsStatus.ThreeArgs:
-                    this._status = this.InitBoard(args[0], args[1], args[2]);
+                    this.status = this.InitBoard(args[0], args[1], args[2]);
                     break;
                 default:
                     break;
@@ -49,12 +49,10 @@ namespace ChessBoard
         public void PrintBoardOrMessage()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            switch (this._status)
+            switch (this.status)
             {
                 case BoardConfig.ApplicationStatus.NoArgs:
-                    Console.WriteLine("No arguments");
                     Console.ResetColor();
-                    Console.WriteLine(BoardConfig.MESSAGE_NO_ARGS);
                     Console.WriteLine(BoardConfig.USER_MANUAL);
                     break;
                 case BoardConfig.ApplicationStatus.InvalidArgs:
@@ -71,7 +69,7 @@ namespace ChessBoard
                     break;
                 default:
                     Console.ResetColor();
-                    ChessBoardConsolePrinter.PrintBoard(this._board);
+                    ChessBoardConsolePrinter.PrintBoard(this.board);
                     break;
             }
         }
@@ -80,7 +78,7 @@ namespace ChessBoard
         /// <returns> Current status of application. </returns>
         public BoardConfig.ApplicationStatus GetStatus()
         {
-            return this._status;
+            return this.status;
         }
 
         private BoardConfig.ApplicationStatus InitBoard(string width)
@@ -91,7 +89,7 @@ namespace ChessBoard
             {
                 if (this.IsValidSizing(boardWidth))
                 {
-                    this._board = new Board(boardWidth, boardWidth);
+                    this.board = new Board(boardWidth, boardWidth);
                     status = BoardConfig.ApplicationStatus.Success;
                 }
                 else
@@ -116,7 +114,7 @@ namespace ChessBoard
             {
                 if (this.IsValidSizing(boardWidth, boardHeight))
                 {
-                    this._board = new Board(boardWidth, boardHeight);
+                    this.board = new Board(boardWidth, boardHeight);
                     status = BoardConfig.ApplicationStatus.Success;
                 }
                 else
@@ -144,7 +142,7 @@ namespace ChessBoard
             {
                 if (this.IsValidSizing(boardWidth, boardHeight))
                 {
-                    this._board = new Board(boardWidth, boardHeight, isWhite);
+                    this.board = new Board(boardWidth, boardHeight, isWhite);
                     status = BoardConfig.ApplicationStatus.Success;
                 }
                 else

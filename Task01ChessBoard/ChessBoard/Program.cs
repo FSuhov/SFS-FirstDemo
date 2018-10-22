@@ -14,10 +14,10 @@ namespace ChessBoard
     {
         private static void Main(string[] args)
         {
-            string[] localArgs = { };
             ChessBoardConsoleUserInterface chessBoard = new ChessBoardConsoleUserInterface();
-            chessBoard.ReadInputAndSetStatus(localArgs);
+            chessBoard.ReadInputAndSetStatus(args);
             chessBoard.PrintBoardOrMessage();
+            Console.ReadKey();
         }
     }
 }

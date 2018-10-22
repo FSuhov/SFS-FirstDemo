@@ -40,6 +40,10 @@ namespace Envelopes
                     this.PrintResult();
                 }
             }
+            else if (args.Length == 0)
+            {
+                Console.WriteLine(ConfigEnvelopes.USER_MANUAL);
+            }
             else
             {
                 this.PrintResult();
@@ -49,8 +53,10 @@ namespace Envelopes
             {
                 this.RepeatEntry();
             }
-
-            Console.WriteLine(ConfigEnvelopes.GOODBUY_MESSAGE);
+            else
+            {
+                Console.WriteLine(ConfigEnvelopes.GOODBUY_MESSAGE);
+            }
         }
 
         private bool IsWantToContinue()
