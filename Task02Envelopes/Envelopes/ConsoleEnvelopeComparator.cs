@@ -22,8 +22,8 @@ namespace Envelopes
     /// <summary>Represents an object for interaction with user. </summary>
     internal class ConsoleEnvelopeComparator
     {
-        private Envelope _envelopeA;
-        private Envelope _envelopeB;
+        private Envelope envelopeA;
+        private Envelope envelopeB;
 
         /// <summary>
         /// Implements the interaction with user via command line/console input/output.
@@ -62,13 +62,13 @@ namespace Envelopes
 
         private void PrintResult()
         {
-            if (this._envelopeA != null && this._envelopeB != null)
+            if (this.envelopeA != null && this.envelopeB != null)
             {
-                ComparisonResult result = (ComparisonResult)this._envelopeA.CompareTo(this._envelopeB);
+                ComparisonResult result = (ComparisonResult)this.envelopeA.CompareTo(this.envelopeB);
                 Console.WriteLine(
                     "Comparing envelopes:\n Envelope 1: {0}{2} Envelope 2: {1}{2}",
-                     this._envelopeA.ToString(),
-                     this._envelopeB.ToString(),
+                     this.envelopeA.ToString(),
+                     this.envelopeB.ToString(),
                      Environment.NewLine);
                 switch (result)
                 {
@@ -101,8 +101,8 @@ namespace Envelopes
             if (float.TryParse(args[0], out a) && float.TryParse(args[1], out b)
                 && float.TryParse(args[2], out c) && float.TryParse(args[3], out d))
             {
-                this._envelopeA = new Envelope(a, b);
-                this._envelopeB = new Envelope(c, d);
+                this.envelopeA = new Envelope(a, b);
+                this.envelopeB = new Envelope(c, d);
                 return true;
             }
 

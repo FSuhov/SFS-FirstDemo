@@ -15,9 +15,9 @@ namespace FileParser
     /// </summary>
     public class Replacer : IFileParser
     {
-        private string _path;
-        private string _find;
-        private string _replacement;
+        private string path;
+        private string find;
+        private string replacement;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Replacer"/> class.
@@ -27,24 +27,28 @@ namespace FileParser
         /// <param name="replace"> String to be replaced on. </param>
         public Replacer(string path, string find, string replace)
         {
-            this._path = path;
-            this._find = find;
-            this._replacement = replace;
+            this.path = path;
+            this.find = find;
+            this.replacement = replace;
         }
 
         /// <summary>
-        /// Replaces all entries of the string.
-        /// Throws custom exceptions if failed to manage files.
+        /// Replaces all entries of the string in the source file.
+        /// Creates temporary file in order to store the edited data.
+        /// Replaces original file with the temporary file if entries found.
+        /// Deletes temporary file after complition.
+        /// Throws FailedToReplaceFileException if failed to replace original file.
+        /// Throws FailedToDeleteTempFileException if failed to remove temporary file.
         /// </summary>
         /// <returns> Total number of entries replaced. </returns>
         public int ParseFile()
         {
             int entryCount = 0;
-            string tempFileName = Path.GetDirectoryName(this._path) + "\\" + Path.GetRandomFileName() + ".txt";
+            string tempFileName = Path.GetDirectoryName(this.path) + "\\" + Path.GetRandomFileName() + ".txt";
 
             using (StreamWriter output = new StreamWriter(tempFileName))
             {
-                using (StreamReader reader = new StreamReader(this._path))
+                using (StreamReader reader = new StreamReader(this.path))
                 {
                     StringBuilder line;
                     while (!reader.EndOfStream)
@@ -60,11 +64,11 @@ namespace FileParser
             {
                 try
                 {
-                    File.Replace(tempFileName, this._path, null);
+                    File.Replace(tempFileName, this.path, null);
                 }
                 catch
                 {
-                    throw new FailedToReplaceFileException(this._path);
+                    throw new FailedToReplaceFileException(this.path);
                 }
             }
             else
@@ -84,11 +88,11 @@ namespace FileParser
 
         private int ReplaceEntriesInString(StringBuilder text)
         {
-            MatchCollection matches = Regex.Matches(text.ToString(), this._find);
+            MatchCollection matches = Regex.Matches(text.ToString(), this.find);
 
             if (matches.Count > 0)
             {
-                text.Replace(this._find, this._replacement);
+                text.Replace(this.find, this.replacement);
             }
 
             return matches.Count;

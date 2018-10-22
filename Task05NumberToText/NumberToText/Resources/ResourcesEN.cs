@@ -26,8 +26,11 @@ namespace NumberToText
                          "but can easily be extended to larger numbers.{0}" +
                          "You may launch it from command line by entering the number after the .exe file name:{0}" +
                          "print: NumberToText.exe followed by space and the number to convert.{0}" +
-                         "You may also enter second optional argument for localized version: 0 - for English (default) or 1 - for Russian.{0}" +
-                         "========================================================================================={0}",
+                         "You may also enter second optional argument for localized version:{0}"
+                         + "en - for English (default){0}"
+                         + "ru - for Russian, {0}"
+                         + "ua - for Ukrainian {0}."
+                         + "========================================================================================={0}",
                          Environment.NewLine);
 
         /// <summary> A word to be added if negative number submitted. </summary>

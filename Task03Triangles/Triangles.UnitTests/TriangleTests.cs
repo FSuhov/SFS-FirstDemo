@@ -16,10 +16,14 @@ namespace Triangles.UnitTests
                                                                 string name2, double a2, double b2, double c2,
                                                                 int expectedResult)
         {
+            // Arrange
             Triangle triangle1 = new Triangle(name1, a1, b1, c1);
             Triangle triangle2 = new Triangle(name2, a2, b2, c2);
+
+            // Act
             var result = triangle1.CompareTo(triangle2);
 
+            // Assert
             Assert.AreEqual(result, expectedResult);
         }
     }

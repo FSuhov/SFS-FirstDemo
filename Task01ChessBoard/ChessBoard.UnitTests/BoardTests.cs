@@ -9,7 +9,7 @@ namespace ChessBoard.UnitTests
         [TestMethod]
         [DataRow(9, 8, 1, 1)]
         [DataRow(68, 90, 8, 11)]
-        public void BoardConstructor_WhenCalled_CreatesInstance(int height, int width, int expectedCellWidht, int expectedCellHeight)
+        public void BoardConstructor_CreatesValidInstance(int height, int width, int expectedCellWidht, int expectedCellHeight)
         {
             // Arrange
 

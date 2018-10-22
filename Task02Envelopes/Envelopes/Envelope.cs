@@ -48,7 +48,7 @@ namespace Envelopes
                 return -1;
             }
             else if ((this.width > other.width && this.height > other.height) ||
-               (this.height > other.width && this.width > other.height))
+                     (this.height > other.width && this.width > other.height))
             {
                 return 1;
             }

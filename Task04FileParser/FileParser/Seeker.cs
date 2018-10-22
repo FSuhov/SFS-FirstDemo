@@ -14,8 +14,8 @@ namespace FileParser
     /// </summary>
     public class Seeker : IFileParser
     {
-        private string _path;
-        private string _find;
+        private string path;
+        private string find;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Seeker"/> class.
@@ -24,8 +24,8 @@ namespace FileParser
         /// <param name="find"> String to be found. </param>
         public Seeker(string path, string find)
         {
-            this._path = path;
-            this._find = find;
+            this.path = path;
+            this.find = find;
         }
 
         /// <summary>
@@ -36,12 +36,12 @@ namespace FileParser
         public int ParseFile()
         {
             int entryCount = 0;
-            using (StreamReader reader = new StreamReader(this._path))
+            using (StreamReader reader = new StreamReader(this.path))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    entryCount += this.CountEntriesInString(line, this._find);
+                    entryCount += this.CountEntriesInString(line, this.find);
                 }
             }
 

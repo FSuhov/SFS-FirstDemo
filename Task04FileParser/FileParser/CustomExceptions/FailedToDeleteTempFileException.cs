@@ -27,5 +27,15 @@ namespace FileParser
             : base(string.Format("Failed to delete temporary file {0}", path))
         {
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FailedToDeleteTempFileException"/> class.
+        /// </summary>
+        /// <param name="path"> Path to file that could not be removed.</param>
+        /// <param name="inner"> Inner exception.</param>
+        public FailedToDeleteTempFileException(string path, Exception inner)
+            : base(string.Format("Failed to delete temporary file {0}", path), inner)
+        {
+        }
     }
 }

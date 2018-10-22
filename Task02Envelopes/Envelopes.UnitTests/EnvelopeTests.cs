@@ -15,11 +15,14 @@ namespace Envelopes.UnitTests
         [DataRow(8, 6, 6, 8, 0, DisplayName = ConfigEnvelopes.NON_CAN_BE_PLACED)]
         public void CompareTo_WhenCalled_ReturnCompareResult(float widthThis, float heightThis, float widthOther, float heightOther, int expectedResult)
         {
+            // Arrange
             Envelope envelopeThis = new Envelope(widthThis, heightThis);
             Envelope envelopeOther = new Envelope(widthOther, heightOther);
             
+            // Act
             var result = envelopeThis.CompareTo(envelopeOther);
 
+            // Assert
             Assert.AreEqual(result, expectedResult);
         }
     }

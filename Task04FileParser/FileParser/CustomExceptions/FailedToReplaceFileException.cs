@@ -26,5 +26,15 @@ namespace FileParser
             : base(string.Format("The file {0} could not be replaced", path))
         {
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FailedToReplaceFileException"/> class.
+        /// </summary>
+        /// <param name="path"> Path to original file.</param>
+        /// <param name="inner"> Inner exception.</param>
+        public FailedToReplaceFileException(string path, Exception inner)
+            : base(string.Format("Failed to delete temporary file {0}", path), inner)
+        {
+        }
     }
 }

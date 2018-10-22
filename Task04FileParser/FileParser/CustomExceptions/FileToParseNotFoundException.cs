@@ -22,5 +22,15 @@ namespace FileParser
             : base(string.Format("The file {0} does not exist", path))
         {
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileToParseNotFoundException"/> class.
+        /// </summary>
+        /// <param name="path"> Path to file that could not be found.</param>
+        /// <param name="inner"> Inner exception.</param>
+        public FileToParseNotFoundException(string path, Exception inner)
+            : base(string.Format("Failed to delete temporary file {0}", path), inner)
+        {
+        }
     }
 }
