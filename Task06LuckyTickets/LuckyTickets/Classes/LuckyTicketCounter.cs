@@ -4,6 +4,7 @@
 
 namespace LuckyTickets
 {
+    using System;
     using System.Text;
 
     /// <summary>
@@ -35,7 +36,7 @@ namespace LuckyTickets
         public int CountNumberOfLuckyTickets()
         {
             int counter = 0;
-            for (ulong i = 1; i <= this.maxNumber; i++)
+            for (ulong i = LuckyTicketsConfig.MIN_SERIAL_NUMBER; i <= this.maxNumber; i++)
             {
                 if (this.ticketIdentifier.IsLuckyTicket(new Ticket(i, this.digits)))
                 {
@@ -52,7 +53,8 @@ namespace LuckyTickets
         /// <returns> A string containing minimal and maximum possible serial number </returns>
         public override string ToString()
         {
-            return string.Format("{0} within the range of 0 and {1}", this.ticketIdentifier.ToString(), this.maxNumber);
+            string min = LuckyTicketsConfig.MIN_SERIAL_NUMBER.ToString("D" + this.digits.ToString());
+            return string.Format("{0} within the range of {1} and {2}", this.ticketIdentifier.ToString(), min,  this.maxNumber);
         }
 
         private ulong GetMaxNumber(int digits)

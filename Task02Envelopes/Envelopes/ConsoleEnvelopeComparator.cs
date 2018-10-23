@@ -70,9 +70,10 @@ namespace Envelopes
         {
             if (this.envelopeA != null && this.envelopeB != null)
             {
+                Console.Clear();
                 ComparisonResult result = (ComparisonResult)this.envelopeA.CompareTo(this.envelopeB);
                 Console.WriteLine(
-                    "Comparing envelopes:\n Envelope 1: {0}{2} Envelope 2: {1}{2}",
+                    "Comparing envelopes:{2}Envelope 1: {0}{2}Envelope 2: {1}{2}",
                      this.envelopeA.ToString(),
                      this.envelopeB.ToString(),
                      Environment.NewLine);
@@ -96,7 +97,9 @@ namespace Envelopes
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ConfigEnvelopes.WRONG_VALUE_MESSAGE);
+                Console.ResetColor();
                 Console.WriteLine(ConfigEnvelopes.USER_MANUAL);
             }
         }
@@ -141,7 +144,9 @@ namespace Envelopes
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(ConfigEnvelopes.WRONG_VALUE_MESSAGE);
+                    Console.ResetColor();
                 }
             }
 

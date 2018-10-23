@@ -27,17 +27,19 @@ namespace Envelopes
 
         /// <summary> Description of application and user manual</summary>
         public static readonly string USER_MANUAL = string.Format(
-              "This application determines whether one of two envelopes given can be placed into another.{0}"
+              "========================================================================================={0}"
+            + "This application determines whether one of two envelopes given can be placed into another.{0}"
             + "On launch you have to provide 4 numeric values - sides of envelopes.{0}"
-            + "Alternatively you may enter it manually via console."
-            + "Numbers must be positive, the decimal separator is \'.\'",
+            + "Alternatively you may enter it manually via console.{0}"
+            + "Numbers must be positive, the decimal separator is \'.\'{0}"
+            + "=========================================================================================",
             Environment.NewLine);
 
         /// <summary> Delimiter to be written on console to separate the stages of application </summary>
         public static readonly string DELIMITER = "===============================================================";
 
         /// <summary> The message to be displayed when invalid data entered </summary>
-        public static readonly string WRONG_VALUE_MESSAGE = "Wrong data. Number most be positive, the decimal separator is \'.\'";
+        public static readonly string WRONG_VALUE_MESSAGE = "Wrong data. Numbers most be positive, the decimal separator is \'.\' 4 numbers are required.";
 
         /// <summary> The message prompting user to continue or stop the application </summary>
         public static readonly string ASK_TO_CONTINUE_MESSAGE = "Would you like to continue? => yes or y";
