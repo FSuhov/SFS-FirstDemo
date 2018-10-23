@@ -11,14 +11,14 @@ namespace LuckyTickets
     /// </summary>
     public class Ticket
     {
-        private byte[] _numberAsArray;
+        private byte[] numberAsArray;
 
         /// <summary> Initializes a new instance of the <see cref="Ticket"/> class. </summary>
         /// <param name="number"> Serial number of ticket. </param>
         /// <param name="digits"> Quantity of digits in serial number. </param>
         public Ticket(ulong number, int digits)
         {
-            this._numberAsArray = this.NumberToArray(number, digits);
+            this.numberAsArray = this.NumberToArray(number, digits);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace LuckyTickets
             {
                 try
                 {
-                    return this._numberAsArray[index];
+                    return this.numberAsArray[index];
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -49,7 +49,7 @@ namespace LuckyTickets
         /// <returns> Length of serial number - i.e. number of digits. </returns>
         public int GetNumberLength()
         {
-            return this._numberAsArray.Length;
+            return this.numberAsArray.Length;
         }
 
         private byte[] NumberToArray(ulong number, int digits)

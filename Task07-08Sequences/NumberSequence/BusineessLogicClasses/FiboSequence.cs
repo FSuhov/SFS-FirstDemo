@@ -4,6 +4,7 @@
 
 namespace NumberSequence.BusineessLogicClasses
 {
+    using System;
     using System.Collections.Generic;
     using NumberSequence.Inetrfaces;
 
@@ -13,8 +14,8 @@ namespace NumberSequence.BusineessLogicClasses
     /// </summary>
     public class FiboSequence : ISequence
     {
-        private int _start;
-        private int _limit;
+        private int start;
+        private int limit;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FiboSequence"/> class.
@@ -23,8 +24,8 @@ namespace NumberSequence.BusineessLogicClasses
         /// <param name="limit"> End of range. </param>
         public FiboSequence(int start, int limit)
         {
-            this._start = start;
-            this._limit = limit;
+            this.start = start;
+            this.limit = limit;
         }
 
         /// <summary>
@@ -37,12 +38,23 @@ namespace NumberSequence.BusineessLogicClasses
             int a = 0;
             int b = 1;
 
-            while (b <= this._limit)
+            while (b <= this.limit)
             {
                 int temp = b;
-                b = a + b;
-                a = temp;
-                if (b >= this._start)
+                try
+                {
+                    checked
+                    {
+                        b = a + b;
+                        a = temp;
+                    }
+                }
+                catch (OverflowException)
+                {
+                    yield break;
+                }
+
+                if (b >= this.start && b <= this.limit)
                 {
                     yield return b;
                 }
@@ -55,7 +67,7 @@ namespace NumberSequence.BusineessLogicClasses
         /// <returns> Informative string. </returns>
         public override string ToString()
         {
-            return $"Fibo sequence from {this._start} to {this._limit}:";
+            return $"Fibo sequence from {this.start} to {this.limit}:";
         }
     }
 }

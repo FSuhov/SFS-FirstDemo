@@ -13,8 +13,8 @@ namespace FileParser
     /// </summary>
     public class ConsoleUserInterface
     {
-        private IFileParser _fileParser;
-        private Config.WorkMode _workMode;
+        private IFileParser fileParser;
+        private Config.WorkMode workMode;
 
         /// <summary>
         /// Interacts with user console entry, valudates the entered data, sets workMode and print result.
@@ -31,13 +31,13 @@ namespace FileParser
                         break;
                     case Config.NumberOfArgs.TwoArgs:
                         this.CheckFilePath(args[0]);
-                        this._workMode = Config.WorkMode.Find;
-                        this._fileParser = new Seeker(args[0], args[1]);
+                        this.workMode = Config.WorkMode.Find;
+                        this.fileParser = new Seeker(args[0], args[1]);
                         break;
                     case Config.NumberOfArgs.ThreeArgs:
                         this.CheckFilePath(args[0]);
-                        this._workMode = Config.WorkMode.Replace;
-                        this._fileParser = new Replacer(args[0], args[1], args[2]);
+                        this.workMode = Config.WorkMode.Replace;
+                        this.fileParser = new Replacer(args[0], args[1], args[2]);
                         break;
                     default:
                         Console.WriteLine(Config.USER_MANUAL);
@@ -65,11 +65,11 @@ namespace FileParser
 
         private void ParseFileAndPrintResult()
         {
-            if (this._workMode != Config.WorkMode.NotSet)
+            if (this.workMode != Config.WorkMode.NotSet)
             {
-                int result = this._fileParser.ParseFile();
-                Console.WriteLine($"File has been parsed in {this._workMode} mode");
-                switch (this._workMode)
+                int result = this.fileParser.ParseFile();
+                Console.WriteLine($"File has been parsed in {this.workMode} mode");
+                switch (this.workMode)
                 {
                     case Config.WorkMode.Find:
                         Console.WriteLine($"{result} have been found");

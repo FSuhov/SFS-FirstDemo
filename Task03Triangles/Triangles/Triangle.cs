@@ -20,9 +20,7 @@ namespace Triangles
         public Triangle(string name, double a, double b, double c)
         {
             this.Name = name;
-            this.sideA = a;
-            this.sideB = b;
-            this.sideC = c;
+            this.InitSides(a, b, c);
         }
 
         /// <summary> Gets or sets verbal name of shape given by user </summary>
@@ -68,6 +66,20 @@ namespace Triangles
         public override string ToString()
         {
             return $"[Triangle {this.Name}]: {this.GetArea()} cm";
+        }
+
+        private void InitSides(double a, double b, double c)
+        {
+            if ((a + b) > c && (a + c) > b && (b + c) > a)
+            {
+                this.sideA = a;
+                this.sideB = b;
+                this.sideC = c;
+            }
+            else
+            {
+                throw new InvalidSidesException(a, b, c);
+            }
         }
     }
 }

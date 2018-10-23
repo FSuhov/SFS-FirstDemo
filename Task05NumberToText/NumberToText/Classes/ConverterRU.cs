@@ -44,14 +44,14 @@ namespace NumberToText.Classes
         /// <summary>
         /// Appends values from Dictionaries corresponding to the number.
         /// </summary>
-        /// <param name="num"> Value to be converted. Can </param>
+        /// <param name="number"> Value to be converted. Can </param>
         /// <param name="largeDigit"> The key of corresponging Dictionary </param>
         /// <returns> Leftovers of value after appending larger digits </returns>
-        protected override long Append(long num, long largeDigit)
+        protected override long Append(long number, long largeDigit)
         {
-            if (num > largeDigit - 1)
+            if (number > largeDigit - 1)
             {
-                long baseScale = num / largeDigit;
+                long baseScale = number / largeDigit;
                 int lastDigit = this.GetLastDigit(baseScale);
                 if ((lastDigit == 1 || lastDigit == 2) && largeDigit == 1000)
                 {
@@ -75,25 +75,25 @@ namespace NumberToText.Classes
                     this.Result.AppendFormat("{0} ", this.LargeNumbersText[largeDigit]);
                 }
 
-                num = num - (baseScale * largeDigit);
+                number = number - (baseScale * largeDigit);
             }
 
-            return num;
+            return number;
         }
 
         /// <summary> Appends hundred scale text </summary>
-        /// <param name="num"> Value to be converted </param>
+        /// <param name="number"> Value to be converted </param>
         /// <returns> Leftovers of number </returns>
-        protected override long AppendHundreds(long num)
+        protected override long AppendHundreds(long number)
         {
-            if (num > 99)
+            if (number > 99)
             {
-                long hundreds = num / 100;
+                long hundreds = number / 100;
                 this.Result.AppendFormat("{0} ", this.HundredsText[hundreds]);
-                num = num - (hundreds * 100);
+                number = number - (hundreds * 100);
             }
 
-            return num;
+            return number;
         }
 
         /// <summary> Loads Russian dictionaries. </summary>

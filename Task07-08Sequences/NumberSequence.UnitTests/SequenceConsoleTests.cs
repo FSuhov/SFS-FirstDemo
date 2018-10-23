@@ -8,7 +8,7 @@ namespace NumberSequence.UnitTests
     public class SequenceConsoleTests
     {
         [TestMethod]
-        [DataRow(new string[] { }, ConfigData.Config.AppStatus.InvalidArgs, DisplayName ="When no arguments entered")]
+        [DataRow(new string[] { }, ConfigData.Config.AppStatus.NoArgs, DisplayName ="When no arguments entered")]
         [DataRow(new string[] {"as "}, ConfigData.Config.AppStatus.InvalidArgs, DisplayName = "Non-numeric arguments entered")]
         [DataRow(new string[] {"12" }, ConfigData.Config.AppStatus.PowerSequence, DisplayName = "One valid argument entered")]
         [DataRow(new string[] {"45", "190" }, ConfigData.Config.AppStatus.FiboSequence, DisplayName = "When two valid arguments entered")]

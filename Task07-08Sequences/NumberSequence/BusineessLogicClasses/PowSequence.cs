@@ -4,6 +4,7 @@
 
 namespace NumberSequence.BusineessLogicClasses
 {
+    using System;
     using System.Collections.Generic;
     using NumberSequence.Inetrfaces;
 
@@ -13,8 +14,8 @@ namespace NumberSequence.BusineessLogicClasses
     /// </summary>
     public class PowSequence : ISequence
     {
-        private int _start = 0;
-        private int _limit;
+        private int start = 0;
+        private int limit;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PowSequence"/> class.
@@ -22,7 +23,7 @@ namespace NumberSequence.BusineessLogicClasses
         /// <param name="limit"> Top limit of range. </param>
         public PowSequence(int limit)
         {
-            this._limit = limit;
+            this.limit = limit;
         }
 
         /// <summary>
@@ -33,9 +34,9 @@ namespace NumberSequence.BusineessLogicClasses
         /// <returns> A collection containing recorder numbers that specifies the condition. </returns>
         public IEnumerable<int> GetSequence()
         {
-            for (int i = this._start; i < this._limit; i++)
+            for (int i = this.start; i < this.limit; i++)
             {
-                if (i * i < this._limit)
+                if (i * i < this.limit)
                 {
                     yield return i;
                 }
@@ -48,7 +49,7 @@ namespace NumberSequence.BusineessLogicClasses
         /// <returns> Informative string. </returns>
         public override string ToString()
         {
-            return $"Pow sequence to {this._limit}:";
+            return $"Pow sequence to {this.limit}:";
         }
     }
 }

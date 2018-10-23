@@ -86,6 +86,10 @@ namespace Triangles
             {
                 Console.WriteLine("Values must be positive");
             }
+            catch (InvalidSidesException)
+            {
+                Console.WriteLine("Triangle with given sides can not exist.");
+            }
             finally
             {
                 Console.ResetColor();

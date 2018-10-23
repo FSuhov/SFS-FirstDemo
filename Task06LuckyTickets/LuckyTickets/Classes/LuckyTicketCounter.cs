@@ -11,10 +11,10 @@ namespace LuckyTickets
     /// </summary>
     public class LuckyTicketCounter
     {
-        private ulong _maxNumber;
-        private int _digits;
+        private ulong maxNumber;
+        private int digits;
 
-        private ILuckyTicketIdentifier _ticketIdentifier;
+        private ILuckyTicketIdentifier ticketIdentifier;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LuckyTicketCounter"/> class.
@@ -23,9 +23,9 @@ namespace LuckyTickets
         /// <param name="digits"> A number of digits in the ticket. </param>
         public LuckyTicketCounter(ILuckyTicketIdentifier ticketIdentifier, int digits = LuckyTicketsConfig.DEFAULT_DIGITS)
         {
-            this._ticketIdentifier = ticketIdentifier;
-            this._maxNumber = this.GetMaxNumber(digits);
-            this._digits = digits;
+            this.ticketIdentifier = ticketIdentifier;
+            this.maxNumber = this.GetMaxNumber(digits);
+            this.digits = digits;
         }
 
         /// <summary>
@@ -35,9 +35,9 @@ namespace LuckyTickets
         public int CountNumberOfLuckyTickets()
         {
             int counter = 0;
-            for (ulong i = 1; i <= this._maxNumber; i++)
+            for (ulong i = 1; i <= this.maxNumber; i++)
             {
-                if (this._ticketIdentifier.IsLuckyTicket(new Ticket(i, this._digits)))
+                if (this.ticketIdentifier.IsLuckyTicket(new Ticket(i, this.digits)))
                 {
                     counter++;
                 }
@@ -52,7 +52,7 @@ namespace LuckyTickets
         /// <returns> A string containing minimal and maximum possible serial number </returns>
         public override string ToString()
         {
-            return string.Format("{0} within the range of 0 and {1}", this._ticketIdentifier.ToString(), this._maxNumber);
+            return string.Format("{0} within the range of 0 and {1}", this.ticketIdentifier.ToString(), this.maxNumber);
         }
 
         private ulong GetMaxNumber(int digits)

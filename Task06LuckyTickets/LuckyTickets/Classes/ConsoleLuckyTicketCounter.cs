@@ -10,9 +10,9 @@ namespace LuckyTickets
     /// <summary> Represents a class for interaction with user via console. </summary>
     internal class ConsoleLuckyTicketCounter
     {
-        private LuckyTicketCounter _ticketCounter;
+        private LuckyTicketCounter ticketCounter;
 
-        private LuckyTicketsConfig.Status _status;
+        private LuckyTicketsConfig.Status status;
 
         /// <summary>
         /// Sets the status of application depending on arguments received.
@@ -23,16 +23,16 @@ namespace LuckyTickets
             switch (args.Length)
             {
                 case 0:
-                    this._status = LuckyTicketsConfig.Status.NoArgs;
+                    this.status = LuckyTicketsConfig.Status.NoArgs;
                     break;
                 case 1:
-                    this._status = this.InitLuckyTicket(args[0]);
+                    this.status = this.InitLuckyTicket(args[0]);
                     break;
                 case 2:
-                    this._status = this.InitLuckyTicket(args[0], args[1]);
+                    this.status = this.InitLuckyTicket(args[0], args[1]);
                     break;
                 default:
-                    this._status = LuckyTicketsConfig.Status.InvalidArgs;
+                    this.status = LuckyTicketsConfig.Status.InvalidArgs;
                     break;
             }
         }
@@ -42,13 +42,13 @@ namespace LuckyTickets
         /// </summary>
         public void ShowResult()
         {
-            if (this._status == LuckyTicketsConfig.Status.Success)
+            if (this.status == LuckyTicketsConfig.Status.Success)
             {
                 int result = 0;
                 try
                 {
-                    result = this._ticketCounter.CountNumberOfLuckyTickets();
-                    Console.WriteLine("There are {0} lucky tickets possible using {1} ", result, this._ticketCounter.ToString());
+                    result = this.ticketCounter.CountNumberOfLuckyTickets();
+                    Console.WriteLine("There are {0} lucky tickets possible using {1} ", result, this.ticketCounter.ToString());
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -58,7 +58,7 @@ namespace LuckyTickets
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                switch (this._status)
+                switch (this.status)
                 {
                     case LuckyTicketsConfig.Status.NoArgs:
                         Console.WriteLine("No command line arguments provided");
@@ -114,11 +114,11 @@ namespace LuckyTickets
             switch (mode)
             {
                 case "Moscow":
-                    this._ticketCounter = new LuckyTicketCounter(new LuckyTicketMoscow());
+                    this.ticketCounter = new LuckyTicketCounter(new LuckyTicketMoscow());
                     status = LuckyTicketsConfig.Status.Success;
                     break;
                 case "Piter":
-                    this._ticketCounter = new LuckyTicketCounter(new LuckyTicketPeter());
+                    this.ticketCounter = new LuckyTicketCounter(new LuckyTicketPeter());
                     status = LuckyTicketsConfig.Status.Success;
                     break;
                 case "File not found":
@@ -144,11 +144,11 @@ namespace LuckyTickets
                 switch (mode)
                 {
                     case "Moscow":
-                        this._ticketCounter = new LuckyTicketCounter(new LuckyTicketMoscow(), parsedDigits);
+                        this.ticketCounter = new LuckyTicketCounter(new LuckyTicketMoscow(), parsedDigits);
                         status = LuckyTicketsConfig.Status.Success;
                         break;
                     case "Piter":
-                        this._ticketCounter = new LuckyTicketCounter(new LuckyTicketPeter(), parsedDigits);
+                        this.ticketCounter = new LuckyTicketCounter(new LuckyTicketPeter(), parsedDigits);
                         status = LuckyTicketsConfig.Status.Success;
                         break;
                     case "File not found":

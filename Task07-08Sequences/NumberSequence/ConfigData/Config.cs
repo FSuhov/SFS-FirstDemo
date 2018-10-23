@@ -32,7 +32,10 @@ namespace NumberSequence.ConfigData
         /// </summary>
         public enum AppStatus
         {
-            /// <summary> No valid arguments. </summary>
+            /// <summary> No arguments provided. </summary>
+            NoArgs,
+
+            /// <summary> Invalid arguments. </summary>
             InvalidArgs,
 
             /// <summary> Application works in Pow mode (Task 7). </summary>

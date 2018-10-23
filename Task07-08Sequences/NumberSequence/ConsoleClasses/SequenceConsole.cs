@@ -15,8 +15,8 @@ namespace NumberSequence.ConsoleClasses
     /// </summary>
     public class SequenceConsole
     {
-        private ISequence _sequence;
-        private Config.AppStatus _status;
+        private ISequence sequence;
+        private Config.AppStatus status;
 
         /// <summary>
         /// Sets the work mode of application depanding on command line arguments provided.
@@ -27,16 +27,16 @@ namespace NumberSequence.ConsoleClasses
             switch ((Config.Args)args.Length)
             {
                 case Config.Args.NoArgs:
-                    this._status = Config.AppStatus.InvalidArgs;
+                    this.status = Config.AppStatus.NoArgs;
                     break;
                 case Config.Args.OneArg:
-                    this._status = this.ValidateAndGetStatus(args[0]);
+                    this.status = this.ValidateAndGetStatus(args[0]);
                     break;
                 case Config.Args.TwoArgs:
-                    this._status = this.ValidateAndGetStatus(args[0], args[1]);
+                    this.status = this.ValidateAndGetStatus(args[0], args[1]);
                     break;
                 default:
-                    this._status = Config.AppStatus.InvalidArgs;
+                    this.status = Config.AppStatus.InvalidArgs;
                     break;
             }
         }
@@ -46,7 +46,11 @@ namespace NumberSequence.ConsoleClasses
         /// </summary>
         public void PrintSequenceOrMessage()
         {
-            if(this._status == Config.AppStatus.InvalidArgs)
+            if (this.status == Config.AppStatus.NoArgs)
+            {
+                Console.WriteLine(Config.USER_MANUAL);
+            }
+            else if (this.status == Config.AppStatus.InvalidArgs)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(Config.MESSAGE_INVALID_ARGS);
@@ -55,10 +59,17 @@ namespace NumberSequence.ConsoleClasses
             }
             else
             {
-                int[] result = this._sequence.GetSequence().ToArray();
-                Console.WriteLine(this._sequence.ToString());
-
-                this.PrintSequence(result);
+                int[] result;
+                try
+                {
+                    result = this.sequence.GetSequence().ToArray();
+                    Console.WriteLine(this.sequence.ToString());
+                    this.PrintSequence(result);
+                }
+                catch (OutOfMemoryException)
+                {
+                    Console.WriteLine("The resulting sequence requires too much memory. Please shorten the range.");
+                }
             }
 
             Console.ReadKey();
@@ -68,7 +79,7 @@ namespace NumberSequence.ConsoleClasses
         /// <returns> Current status. </returns>
         public Config.AppStatus GetStatus()
         {
-            return this._status;
+            return this.status;
         }
 
         private void PrintSequence(int[] array)
@@ -92,7 +103,7 @@ namespace NumberSequence.ConsoleClasses
             if (int.TryParse(firstArgument, out limit) && this.IsValidArgument(limit))
             {
                 appStatus = Config.AppStatus.PowerSequence;
-                this._sequence = new PowSequence(limit);
+                this.sequence = new PowSequence(limit);
             }
             else
             {
@@ -112,7 +123,7 @@ namespace NumberSequence.ConsoleClasses
                 && this.IsValidArgument(start, limit))
             {
                 appStatus = Config.AppStatus.FiboSequence;
-                this._sequence = new FiboSequence(start, limit);
+                this.sequence = new FiboSequence(start, limit);
             }
             else
             {

@@ -11,7 +11,7 @@ namespace NumberSequence
     {
         private static void Main(string[] args)
         {
-            string[] localArgs = { "45", "150"};
+            string[] localArgs = { "364", "12900" };
             SequenceConsole sequenceConsole = new SequenceConsole();
             sequenceConsole.ReadInputAndSetStatus(localArgs);
             sequenceConsole.PrintSequenceOrMessage();

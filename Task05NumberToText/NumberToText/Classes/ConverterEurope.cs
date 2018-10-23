@@ -35,26 +35,26 @@ namespace NumberToText.Classes
         /// <summary>
         /// Converts numeric representation of number into next representation.
         /// </summary>
-        /// <param name="num"> Number to be converted. </param>
+        /// <param name="number"> Number to be converted. </param>
         /// <returns> Text representation of number. </returns>
-        public string ConvertToWords(long num)
+        public string ConvertToWords(long number)
         {
             this.Result = new StringBuilder();
 
-            if (num == 0)
+            if (number == 0)
             {
-                this.Result.Append(this.SmallNumbersText[num]);
+                this.Result.Append(this.SmallNumbersText[number]);
                 return this.Result.ToString();
             }
 
-            if (num < 0)
+            if (number < 0)
             {
                 this.Result.AppendFormat("{0} ", this.Negative);
-                num = Math.Abs(num);
+                number = Math.Abs(number);
             }
 
-            num = this.LargeNumbersText.Aggregate(num, (current, scale) => this.Append(current, scale.Key));
-            this.AppendLessThanOneThousand(num);
+            number = this.LargeNumbersText.Aggregate(number, (current, scale) => this.Append(current, scale.Key));
+            this.AppendLessThanOneThousand(number);
 
             return this.Result.ToString().Trim();
         }
@@ -62,71 +62,71 @@ namespace NumberToText.Classes
         /// <summary>
         /// Appends values from Dictionaries corresponding to the number.
         /// </summary>
-        /// <param name="num"> Value to be converted. Can </param>
+        /// <param name="number"> Value to be converted. Can </param>
         /// <param name="largeDigit"> The key of corresponging Dictionary </param>
         /// <returns> Leftovers of value after appending larger digits </returns>
-        protected virtual long Append(long num, long largeDigit)
+        protected virtual long Append(long number, long largeDigit)
         {
-            if (num > largeDigit - 1)
+            if (number > largeDigit - 1)
             {
-                long baseScale = num / largeDigit;
+                long baseScale = number / largeDigit;
                 this.AppendLessThanOneThousand(baseScale);
                 this.Result.AppendFormat("{0} ", this.LargeNumbersText[largeDigit]);
-                num = num - (baseScale * largeDigit);
+                number = number - (baseScale * largeDigit);
             }
 
-            return num;
+            return number;
         }
 
         /// <summary> Appends hundred scale text </summary>
-        /// <param name="num"> Value to be converted </param>
+        /// <param name="number"> Value to be converted </param>
         /// <returns> Leftovers of number </returns>
-        protected virtual long AppendHundreds(long num)
+        protected virtual long AppendHundreds(long number)
         {
-            if (num > 99)
+            if (number > 99)
             {
-                long hundreds = num / 100;
+                long hundreds = number / 100;
                 this.Result.AppendFormat("{0} {1} ", this.SmallNumbersText[hundreds], this.SmallNumbersText[100]);
-                num = num - (hundreds * 100);
+                number = number - (hundreds * 100);
             }
 
-            return num;
+            return number;
         }
 
         /// <summary> Appends words between hundreds and thousand scale </summary>
-        /// <param name="num"> Value to be converted </param>
+        /// <param name="number"> Value to be converted </param>
         /// <returns> Leftovers of number </returns>
-        protected long AppendLessThanOneThousand(long num)
+        protected long AppendLessThanOneThousand(long number)
         {
-            num = this.AppendHundreds(num);
-            num = this.AppendTens(num);
-            this.AppendUnits(num);
-            return num;
+            number = this.AppendHundreds(number);
+            number = this.AppendTens(number);
+            this.AppendUnits(number);
+            return number;
         }
 
         /// <summary> Appends units, i.e. numbers less than 20 </summary>
-        /// <param name="num"> Value to be converted </param>
-        protected void AppendUnits(long num)
+        /// <param name="number"> Value to be converted </param>
+        protected void AppendUnits(long number)
         {
-            if (num > 0)
+            if (number > 0)
             {
-                this.Result.AppendFormat("{0} ", this.SmallNumbersText[num]);
+                this.Result.AppendFormat("{0} ", this.SmallNumbersText[number]);
             }
         }
 
         /// <summary> Appends text representation of tens </summary>
-        /// <param name="num"> Value to be converted </param>
+        /// <param name="number"> Value to be converted </param>
         /// <returns> Leftovers of number </returns>
-        protected long AppendTens(long num)
+        protected long AppendTens(long number)
         {
-            if (num > 20)
+            if (number > 20)
             {
-                var tens = ((long)(num / 10)) * 10;
+                var tens = ((long)(number / 10)) * 10;
                 this.Result.AppendFormat("{0} ", this.SmallNumbersText[tens]);
-                num = num - tens;
+                number = number - tens;
             }
 
-            return num;
+            return number;
         }
     }
 }
